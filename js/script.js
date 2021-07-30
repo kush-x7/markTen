@@ -24,7 +24,7 @@ const five = document.querySelector('.five');
 const two = document.querySelector('.two');
 const one = document.querySelector('.one');
 
-
+const allNotes = [twoThousand, fiveHundred, twoHundred, oneHundred, fifty, twenty, ten, five, two, one];
 
 
 let bill;
@@ -57,18 +57,22 @@ firstReset.addEventListener('click', () => {
     firstInput.value = '';
     next.style.display = 'inline';
     bill = 0;
+
+    for (let i = 0; i < allNotes.length; i++) {
+        allNotes[i].textContent = 0;
+    }
 });
 
 
 let countMoney = (money) => {
     let notes =      [2000, 500, 200, 100, 50, 20, 10, 5, 2, 1 ];
     let notesCount = [ 0,    0,    0,   0,  0,  0,  0, 0, 0, 0 ];
-    const allNotes = [twoThousand, fiveHundred, twoHundred, oneHundred, fifty, twenty, ten, five, two, one];
+    
 
     for (let i = 0; i < notes.length; i++) {
         if (money >= notes[i]) {
             notesCount[i] = Math.floor(money / notes[i]);
-            money -= Math.floor(money / notes[i]) * notes[i];
+            money -= (notes[i] * notesCount[i]);
             allNotes[i].textContent = notesCount[i];
         }
     }
@@ -118,6 +122,10 @@ check.addEventListener('click', () => {
 
 secondReset.addEventListener('click', () => {
     secondInput.value = '';
+
+    for (let i = 0; i < allNotes.length; i++) {
+        allNotes[i].textContent = 0;
+    }
 });
 
 
