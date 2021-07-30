@@ -110,7 +110,7 @@ check.addEventListener('click', () => {
         labelPaid.textContent = received;
         labelReturned.textContent = returned;
 
-        countMoney(enteredNumber);
+        countMoney(returned);
 
 
     }
