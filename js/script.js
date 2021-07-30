@@ -13,9 +13,25 @@ const labelBill = document.querySelector('.label-bill');
 const labelPaid = document.querySelector('.label-paid');
 const labelReturned = document.querySelector('.label-returned');
 
+const twoThousand = document.querySelector('.two-thousand');
+const fiveHundred = document.querySelector('.five-hundred');
+const twoHundred = document.querySelector('.two-hundred');
+const oneHundred = document.querySelector('.one-hundred');
+const fifty = document.querySelector('.fifty');
+const twenty = document.querySelector('.twenty');
+const ten = document.querySelector('.ten');
+const five = document.querySelector('.five');
+const two = document.querySelector('.two');
+const one = document.querySelector('.one');
+
+
+
+
 let bill;
 let received;
 let returned
+
+
 
 next.addEventListener('click', () => { 
     const enteredNumber = Number(firstInput.value); 
@@ -26,7 +42,11 @@ next.addEventListener('click', () => {
     else if (enteredNumber > 0) {
         bill = enteredNumber;
         firstInput.value = bill + "  ✔️";
-        next.style.display = 'none';
+        
+
+        check.style.display = 'inline';
+        secondReset.style.display = 'inline';
+
     }
     else {
         firstInput.value = '';
@@ -40,8 +60,25 @@ firstReset.addEventListener('click', () => {
 });
 
 
+let countMoney = (money) => {
+    let notes =      [2000, 500, 200, 100, 50, 20, 10, 5, 2, 1 ];
+    let notesCount = [ 0,    0,    0,   0,  0,  0,  0, 0, 0, 0 ];
+    const allNotes = [twoThousand, fiveHundred, twoHundred, oneHundred, fifty, twenty, ten, five, two, one];
+
+    for (let i = 0; i < notes.length; i++) {
+        if (money >= notes[i]) {
+            notesCount[i] = Math.floor(money / notes[i]);
+            money -= Math.floor(money / notes[i]) * notes[i];
+            allNotes[i].textContent = notesCount[i];
+        }
+    }
+
+};
+
+
+
 check.addEventListener('click', () => { 
-    const enteredNumber = Number(secondInput.value); 
+    const enteredNumber = Number(secondInput.value);  
 
     if (enteredNumber === 0) {
         secondInput.value = '';
@@ -52,7 +89,7 @@ check.addEventListener('click', () => {
         returned = bill - received;
 
         secondInput.value = received + "  ✔️";
-        check.style.display = 'none';
+        
 
         labelBill.textContent = bill;
         labelPaid.textContent = received;
@@ -62,13 +99,16 @@ check.addEventListener('click', () => {
     else if (enteredNumber > bill) {
         received = enteredNumber;
         returned =  received - bill;
-
         secondInput.value = received + "  ✔️";
-        check.style.display = 'none';
+               
 
         labelBill.textContent = bill;
         labelPaid.textContent = received;
         labelReturned.textContent = returned;
+
+        countMoney(enteredNumber);
+
+
     }
     
     else {
