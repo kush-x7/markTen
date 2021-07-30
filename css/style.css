@@ -204,6 +204,9 @@ th, td {
     ;
   }
 
+  .section-left{
+    min-height: 3.5rem;
+  }
 
   button {
      padding-left: 1rem;
